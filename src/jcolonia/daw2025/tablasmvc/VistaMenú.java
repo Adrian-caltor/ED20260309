@@ -1,104 +1,71 @@
 package jcolonia.daw2025.tablasmvc;
+import java.util.Arrays;
 import java.util.List;
-import java.util.Scanner;
-import java.util.Vector;
 
 /**
- * Clase que muestra el menú a los usuarios
+ * Clase encargada de mostrar un menú en consola.
+ * 
+ * Permite presentar una lista de opciones numeradas
+ * y solicitar al usuario que seleccione una opción.
  */
 
-public class VistaMenú extends VistaGeneral {
+public class VistaMenú {
 	
-	/**
-	 * Título del menú
-	 */
-	
-	private String título;
-	
-	/**
-	 * Lista con todas las opciones del menú
-	 */
-	
-	private List<String> opciones;
-	
-	/**
-	 * Scanner para leer las opciones.
-	 */
-	
-	private static Scanner scIn;
-	
-	static {
-		scIn = new Scanner(System.in);
-	}
+    /**
+     * Título del menú
+     */
 
-	/**
-	 * Constructor que añade las opciones a la lista de la clase y pone el título del
-	 * programa igual al título que queremos.
-	 * 
-	 * @param título para mostrar
-	 * @param opciones opciones para mostrar
-	 */
-	
-	public VistaMenú (String título, List<String> opciones) {
-		this.título = título;
-		this.opciones= new Vector<String>();
-		
-		for (int i = 0; i < opciones.size(); i++) {
-			this.opciones.add(opciones.get(i));
-		}
-		
-	}
-	
-	/**
-	 * Nos muestra el título del programa.
-	 */
-	
-	public void mostrarTitulo() {
-		System.out.printf("%s \n", título);
-		for (int i=0; i < título.length(); i++) {
-		System.out.printf("-");
-		}
-	}
-	
-	/**
-	 * Nos muestran las opciones del menú y salir.
-	 */
-	
-	public void mostrarOpciones() {
-		for (int i = 0; i < opciones.size(); i++) {
-			System.out.printf("%d. %s \n", i+1, opciones.get(i));
-		}
-		System.out.printf("0. Salir \n");
-		
-	}
-	
-	/**
-	 * Lee la opción que solicitemos.
-	 * @return opcion escrita.
-	 */
-	
-	public int pedirOpción() {
-	    int opcion = -1;
+    private String titulo;
 
-	    while (opcion < 0 || opcion > opciones.size()) {
-	        System.out.print("Escribe una opción (0-4): ");
-	        
-	        if (scIn.hasNextInt()) {
-	            opcion = scIn.nextInt();
-	        } else {
-	            System.out.println("No válido");
-	            scIn.next();
-	        }
-	    }
+    /** 
+     * Lista de opciones disponibles
+     */
 
-	    return pedirOpción();
-	}
-	
-	/**
-	 * Nos devuelve el texto correspondiente a la opción.
-	 * @param texto esperado
-	 */
-	public void mostrarTexto(String texto) {
-		System.out.println(texto);
-	}
+    private List<String> opciones; // ahora usamos List
+
+    /**
+     * Constructor del menú.
+     * 
+     * @param titulo que se muestra
+     * @param opciones lista de opciones disponibles como array
+     */
+
+    public VistaMenú(String titulo, String[] opciones) {
+        this.titulo = titulo;
+        this.opciones = Arrays.asList(opciones);
+    }
+
+    /**
+     * Muestra el título y las opciones.
+     */
+    
+    public void mostrarOpciones() {
+
+        System.out.println();
+        System.out.println(titulo);
+
+        for (int i = 0; i < titulo.length(); i++) {
+            System.out.print("-");
+        }
+        System.out.println();
+        for (int i = 0; i < opciones.size(); i++) {
+            System.out.printf("%d. %s%n", i + 1, opciones.get(i));
+        }
+        System.out.println("0. Salir");    
+    }
+
+
+
+    /**
+     * Solicita al usuario que elija una opción.
+     * 
+     * @return opción seleccionada
+     */
+
+    public int pedirOpcion() {
+
+        return VistaGeneral.pedirNúmero("Elija una opción");
+
+    }
+
 }
