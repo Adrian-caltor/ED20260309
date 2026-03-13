@@ -39,7 +39,7 @@ public class TablaMultiplicar {
 		
 		for (int i = 1; i <= 10; i++) {
 			int resultado = número * i;
-			String linea = número + " x " + i + " = " + resultado;
+			String linea = String.format("%d x %d = %d", número, i, resultado);
 			listaTextos.add(linea);
 		}
 	}
@@ -65,10 +65,12 @@ public class TablaMultiplicar {
 	 */
 	public List<String> toListaPantalla() {
 		List<String> listaPantalla = new ArrayList<>();
+		String formato;
 		
 		for (int i = 1; i <= 10; i++) {
 			int resultado = número * i;
-			listaPantalla.add(número + " x " + i + " = " + resultado);
+			formato = String.format("%d + %d = %d", número, i, resultado);
+			listaPantalla.add(formato);
 		}
 		
 		return listaPantalla;
