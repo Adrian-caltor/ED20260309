@@ -9,11 +9,18 @@ public class ControlTablaMultiplicar {
 	*/
 	public static final String FORMATO_RUTA_ARCHIVO_EXPORTACIÓN=
 		"tabla del %02d.txt";
+
+	public static final String[] OPCIONES_MENÚ_PRINCIPAL = { "Mostrar tabla", "Cambiar tabla", "Exportar tabla"};
 	
 	/** Tabla de multiplicar activa. */
 	private TablaMultiplicar tabla;
 
-	public ControlTablaMultiplicar(){
+	/**
+	 * Inicia el método init para pedirnos un número al iniciar el programa.
+	 * @throws ExcepcionES 
+	 */
+	
+	public ControlTablaMultiplicar() throws ExcepcionES{
 		init();
 	}
 
@@ -21,8 +28,9 @@ public class ControlTablaMultiplicar {
 	/**
 	* Pide al usuario un número y prepara la primera
 	* tabla activa.
+	 * @throws ExcepcionES 
 	*/
-	public void init(){
+	public void init() throws ExcepcionES{
 		cambiarTabla();
 	}
 
@@ -30,8 +38,9 @@ public class ControlTablaMultiplicar {
 	* Gestión del menú principal. Desde este menú
 	* se ejecutan las opciones disponibles a elección del usuario.
 	* A la salida del menú se finaliza el programa.
+	 * @throws ExcepcionES 
 	*/
-	public void buclePrincipal(){
+	public void buclePrincipal() throws ExcepcionES{
 		VistaMenú menú;
 		int opción;
 		
@@ -39,7 +48,7 @@ public class ControlTablaMultiplicar {
 		
 		do{
 			menú.mostrarOpciones();
-			opción=menú.pedirOpción();
+			opción=menú.pedirOpcion();
 			
 			switch(opción){
 			case 1: // Mostrar tabla
@@ -68,31 +77,45 @@ public class ControlTablaMultiplicar {
 	* Muestra por pantalla -envía a la salida estándar-
 	* los productos correspondientes a la tabla activa.
 	*/
-	private void mostrarTabla(){}
+	private void mostrarTabla(){
+		TablaMultiplicar.toListaPantalla();
+	}
 	
 	/**
 	* Cambia la tabla activa por otra elegida por el usuario.
+	 * @throws ExcepcionES 
 	*/
-	private void cambiarTabla(){
-		int n;
+	private void cambiarTabla() throws ExcepcionES{
+		int n = 0;
 		
-		VistaGeneral.pedirNúmero("Introduzca el número para la tabla");
+		VistaGeneral.pedirNumero("Introduzca el número para la tabla");
 		
 		tabla=new TablaMultiplicar(n);
 		tabla.generarTabla();
 	}
 
+	
 	/**
 	* Envía a un archivo
 	* los productos correspondientes a la tabla activa.
 	*/
-	private void exportarTabla(){}
+	private void exportarTabla() {
+		boolean ok = tabla.toListaExportación(String.format(FORMATO_RUTA_ARCHIVO_EXPORTACIÓN, tabla.getnumero()));
+
+		if (ok) {
+		VistaGeneral.mostrarAviso("Exportación completada correctamente.");
+		} else {
+		VistaGeneral.mostrarAviso("Error al exportar la tabla.");
+		}
+		}
 	
 	/**
 	 * Muestra un mensaje de aviso indicando que 
 	 * la opción elegida no está disponible.
 	*/
-	private void opciónNoDisponible(){}
+	private void opciónNoDisponible() {
+		VistaGeneral.mostrarAviso("Opción no disponible");
+	}
 
 
 
