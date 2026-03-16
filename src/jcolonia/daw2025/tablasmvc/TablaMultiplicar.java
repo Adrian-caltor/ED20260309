@@ -12,7 +12,7 @@ public class TablaMultiplicar {
 	 * Número para usar
 	 */
 	
-	private int número;
+	private static int número;
 	
 	/**
 	 * Lista para llenar con las lineas de la tabla de multiplicar
@@ -45,6 +45,15 @@ public class TablaMultiplicar {
 	}
 	
 	/**
+	 * Nos da el valor de la variable local, número.
+	 * @return número de la tabla
+	 */
+	
+	public int getnumero() {
+		return número;
+	}
+	
+	/**
 	 * Devuelve una copia de la lista original
 	 * @return Tabla de Multiplicar en formato de exportación
 	 */
@@ -63,7 +72,7 @@ public class TablaMultiplicar {
 	 * Crea una tabla de multiplicar para mostrar por pantalla
 	 * @return Tabla de multiplicar por pantalla
 	 */
-	public List<String> toListaPantalla() {
+	public static List<String> toListaPantalla() {
 		List<String> listaPantalla = new ArrayList<>();
 		String formato;
 		
