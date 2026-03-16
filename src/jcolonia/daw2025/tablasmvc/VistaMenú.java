@@ -1,6 +1,7 @@
 package jcolonia.daw2025.tablasmvc;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Scanner;
 
 /**
  * Clase encargada de mostrar un menú en consola.
@@ -24,11 +25,17 @@ public class VistaMenú {
     private List<String> opciones; // ahora usamos List
 
     /**
+     * Scanner para el programa
+     */
+    private static Scanner scIn = new Scanner(System.in);
+    
+    /**
      * Constructor del menú.
      * 
      * @param titulo que se muestra
      * @param opciones lista de opciones disponibles como array
      */
+   
 
     public VistaMenú(String titulo, String[] opciones) {
         this.titulo = titulo;
@@ -60,11 +67,12 @@ public class VistaMenú {
      * Solicita al usuario que elija una opción.
      * 
      * @return opción seleccionada
+     * @throws ExcepcionES 
      */
 
-    public int pedirOpcion() {
+    public int pedirOpcion() throws ExcepcionES {
 
-        return VistaGeneral.pedirNúmero("Elija una opción");
+        return scIn.nextInt();
 
     }
 
